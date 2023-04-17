@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="table-responsive">
-    
+
+    <div class="col-auto ms-auto">
+        <a class="btn btn-primary" href="{{ route('comics.create') }}">
+          Nuova comics
+        </a>
+      </div>
+
     @foreach ($comics as $comic)
         <table class="table align-middle">
         <thead>
