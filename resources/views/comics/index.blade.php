@@ -36,6 +36,12 @@
             <th>
                 link 
             </th>
+            <th>
+                edit
+            </th>
+            <th>
+                delete
+            </th>
             
         </thead>
         
@@ -50,6 +56,14 @@
                 <td class="align-top">{{$comic->description}}</td>
                 <td class="align-top">{{$comic->price}}</td>
                 <td><a href="{{route('comics.show',$comic->id)}}">link comic</a></td> 
+                <td><a href="{{route('comics.edit',$comic)}}">edit comic</a></td>
+                <td>
+                    <form action="{{ route('comics.destroy',$comic) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+                  </form>
+                </td>
             </tr>
 
             
@@ -57,6 +71,7 @@
         </table>
     @endforeach
   </div>
+  
 
 
 
