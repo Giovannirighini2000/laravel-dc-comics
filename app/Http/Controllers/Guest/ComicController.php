@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 use App\Models\Comic;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\validation\Rule;
 
 class ComicController extends Controller
 {
@@ -25,7 +26,16 @@ class ComicController extends Controller
     public function store(Request $request)
 
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'title'=> 'required|max:255|min:3',
+            'thumb'=> 'required|max:255|url',
+            'type'=> 'required',rule::in(['comic book','graphic novel']),
+            'series'=> 'required|max:255|string',
+            'sale_date'=> 'required|max:20',
+            'price'=> 'required|max:20',
+            'description'=> 'nullable|string ',
+        ]);
+        // $data = $request->all();
 
         $new_comic = new Comic();
 
@@ -48,8 +58,17 @@ class ComicController extends Controller
 
     public function update(Request $request, Comic $comic)
     {
+        $data = $request->validate([
+            'title'=> 'required|max:255|min:3',
+            'thumb'=> 'required|max:255|url',
+            'type'=> 'required',rule::in(['comic book','graphic novel']),
+            'series'=> 'required|max:255|string',
+            'sale_date'=> 'required|max:20',
+            'price'=> 'required|max:20',
+            'description'=> 'nullable|string ',
+        ]);
         
-        $data = $request->all();
+        // $data = $request->all();
 
         $comic->title = $data['title'];
         $comic->thumb = $data['thumb'];
